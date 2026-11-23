@@ -114,4 +114,4 @@ print(bundle["features"])          # the 53 input columns
 
 ## License
 
-MIT, see [LICENSE](LICENSE). Replace `YOUR NAME` in that file with your own name before publishing.
+MIT, see [LICENSE](LICENSE).
