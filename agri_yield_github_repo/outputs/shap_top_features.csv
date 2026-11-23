@@ -1,0 +1,13 @@
+feature,mean_|SHAP|_%,group
+irrigated_flag,7.27,plot
+rain_cum,6.46,weather
+rain_ratio_req,6.04,ratio
+junsep,5.55,weather
+bc_roll3,4.27,rolling
+vc_roll3,3.92,rolling
+variety_te,3.2,encoded
+rain_anom_pct,2.96,ratio
+crop_id,2.53,category
+price_to_cost,2.15,ratio
+rain_octjan,1.7,weather
+junsep_lag1,1.69,lag

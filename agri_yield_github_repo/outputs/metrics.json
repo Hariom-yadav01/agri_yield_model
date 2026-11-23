@@ -1,0 +1,1418 @@
+{
+ "raw_rows_total": 332624,
+ "raw_rows_yield": 294139,
+ "unit_wrong_before_pct": 6.952,
+ "unit_wrong_after_pct": 0.656,
+ "unit_wrong_after_label_pct": 3.437,
+ "implausible_dropped": 566,
+ "price_correct_pct": 100.0,
+ "price_kg_share_pct": 20.106593312129288,
+ "rain_miss_monsoon_pct": 18.645833333333332,
+ "rain_impute_rmse_mm": 127.41741736296053,
+ "rain_impute_bias_mm": -23.929095738582124,
+ "rain_yield_corr": {
+  "cotton": 0.48,
+  "gram": 0.53,
+  "rice": 0.55,
+  "soybean": 0.51,
+  "tur": 0.33,
+  "wheat": 0.43
+ },
+ "n_features": 53,
+ "n_lag_roll_ratio": 25,
+ "leak_table": [
+  {
+   "column": "production_qtl",
+   "mean_abs_spearman_within_crop": 0.409,
+   "known_at_cutoff": "No: post-harvest (= yield \u00d7 area)"
+  },
+  {
+   "column": "insurance_claim_paid",
+   "mean_abs_spearman_within_crop": 0.592,
+   "known_at_cutoff": "No: paid after harvest loss assessment"
+  },
+  {
+   "column": "price_harvest_cur",
+   "mean_abs_spearman_within_crop": 0.134,
+   "known_at_cutoff": "No: harvest-month price, set by this season's supply"
+  },
+  {
+   "column": "post_cutoff_rain",
+   "mean_abs_spearman_within_crop": 0.151,
+   "known_at_cutoff": "No: rain after the forecast cutoff"
+  },
+  {
+   "column": "vc_lag1",
+   "mean_abs_spearman_within_crop": 0.213,
+   "known_at_cutoff": "Yes: last season"
+  },
+  {
+   "column": "rain_cum",
+   "mean_abs_spearman_within_crop": 0.419,
+   "known_at_cutoff": "Yes: to cutoff"
+  },
+  {
+   "column": "price_pre_sow",
+   "mean_abs_spearman_within_crop": 0.248,
+   "known_at_cutoff": "Yes: pre-sowing"
+  },
+  {
+   "column": "oc_pct",
+   "mean_abs_spearman_within_crop": 0.213,
+   "known_at_cutoff": "Yes: soil test"
+  }
+ ],
+ "leak_mae_clean": 2.1929717296157216,
+ "leak_mae_leaky": 0.9167597978553715,
+ "leak_mae_leaky_no_prod": 2.1259050456422655,
+ "causality_test": "300/300",
+ "split_rows": {
+  "train": 190201,
+  "val": 29291,
+  "test": 43894
+ },
+ "rows_modelling": 263386,
+ "adv_auc": 1.0,
+ "adv_auc_stationary": 1.0,
+ "adv_top": [
+  "vc_lag1",
+  "vc_lag2",
+  "village_hist",
+  "junsep_lag1"
+ ],
+ "cv": [
+  {
+   "model": "Persistence (last yr)",
+   "MAE_bcy_mean": 2.986,
+   "MAE_bcy_sd": 0.375,
+   "MAE_row_mean": 3.528,
+   "vs_persistence_%": 0.0
+  },
+  {
+   "model": "3-yr mean",
+   "MAE_bcy_mean": 2.449,
+   "MAE_bcy_sd": 0.097,
+   "MAE_row_mean": 3.025,
+   "vs_persistence_%": 18.0
+  },
+  {
+   "model": "Ridge (per crop)",
+   "MAE_bcy_mean": 1.807,
+   "MAE_bcy_sd": 0.069,
+   "MAE_row_mean": 2.364,
+   "vs_persistence_%": 39.5
+  },
+  {
+   "model": "Random forest",
+   "MAE_bcy_mean": 1.507,
+   "MAE_bcy_sd": 0.158,
+   "MAE_row_mean": 2.035,
+   "vs_persistence_%": 49.5
+  },
+  {
+   "model": "LightGBM (default)",
+   "MAE_bcy_mean": 1.433,
+   "MAE_bcy_sd": 0.049,
+   "MAE_row_mean": 1.946,
+   "vs_persistence_%": 52.0
+  }
+ ],
+ "tuning": {
+  "default_cv": 1.433,
+  "tuned_cv": 1.4310242730740843,
+  "config": {
+   "num_leaves": 127.0,
+   "learning_rate": 0.03,
+   "n_estimators": 500.0,
+   "min_child_samples": 200.0,
+   "subsample": 0.8,
+   "colsample_bytree": 0.6,
+   "reg_lambda": 1.0,
+   "objective": "regression_l1"
+  },
+  "n_configs": 10
+ },
+ "val": {
+  "Persistence (last yr)": {
+   "MAE_bcy": 2.1077376479110166,
+   "MAE_row": 2.826379702658691,
+   "RMSE_row": 4.0933735833552385,
+   "AP": 0.13864500775626692,
+   "base_rate": 0.10876132930513595,
+   "n_bcy": 662.0,
+   "val_precision": null,
+   "val_recall": 0.0,
+   "val_flagged": 0.0
+  },
+  "3-yr mean": {
+   "MAE_bcy": 2.3107212552025893,
+   "MAE_row": 2.91349236157753,
+   "RMSE_row": 4.09176080408208,
+   "AP": 0.11552482010641929,
+   "base_rate": 0.10876132930513595,
+   "n_bcy": 662.0,
+   "val_precision": null,
+   "val_recall": 0.0,
+   "val_flagged": 0.0
+  },
+  "Ridge (per crop)": {
+   "MAE_bcy": 1.9935531432699347,
+   "MAE_row": 2.5032647498115916,
+   "RMSE_row": 3.4932691032560124,
+   "AP": 0.5746122632232397,
+   "base_rate": 0.10876132930513595,
+   "n_bcy": 662.0,
+   "val_precision": 0.7058823529411765,
+   "val_recall": 0.3333333333333333,
+   "val_flagged": 34.0
+  },
+  "Random forest": {
+   "MAE_bcy": 1.5321370977316553,
+   "MAE_row": 2.0620838161616564,
+   "RMSE_row": 3.0580164978287785,
+   "AP": 0.7235483037388216,
+   "base_rate": 0.10876132930513595,
+   "n_bcy": 662.0,
+   "val_precision": 0.703125,
+   "val_recall": 0.625,
+   "val_flagged": 64.0
+  },
+  "LightGBM (default)": {
+   "MAE_bcy": 1.5384254687841596,
+   "MAE_row": 2.004483902605292,
+   "RMSE_row": 2.9980800023797896,
+   "AP": 0.7445732705184336,
+   "base_rate": 0.10876132930513595,
+   "n_bcy": 662.0,
+   "val_precision": 0.7076923076923077,
+   "val_recall": 0.6388888888888888,
+   "val_flagged": 65.0
+  },
+  "LightGBM (tuned)": {
+   "MAE_bcy": 1.4997571482454741,
+   "MAE_row": 1.9813655208318566,
+   "RMSE_row": 2.967133934559827,
+   "AP": 0.748798230124787,
+   "base_rate": 0.10876132930513595,
+   "n_bcy": 662.0,
+   "val_precision": 0.703125,
+   "val_recall": 0.625,
+   "val_flagged": 64.0
+  }
+ },
+ "val_n_bcy": 662,
+ "test": {
+  "Persistence (last yr)": {
+   "MAE_bcy": 4.091030922204539,
+   "MAE_row": 4.408033820467092,
+   "RMSE_row": 6.129514346052391,
+   "AP": 0.22578040355374956,
+   "base_rate": 0.27794561933534745,
+   "n_bcy": 993.0,
+   "test_precision": null,
+   "test_recall": 0.0,
+   "test_flagged": 0.0
+  },
+  "3-yr mean": {
+   "MAE_bcy": 2.996351980815955,
+   "MAE_row": 3.427703224797533,
+   "RMSE_row": 4.83070473293179,
+   "AP": 0.2858489522861605,
+   "base_rate": 0.27794561933534745,
+   "n_bcy": 993.0,
+   "test_precision": null,
+   "test_recall": 0.0,
+   "test_flagged": 0.0
+  },
+  "Ridge (per crop)": {
+   "MAE_bcy": 2.4047265222382004,
+   "MAE_row": 2.845936933189402,
+   "RMSE_row": 4.036395212082519,
+   "AP": 0.7819132831777996,
+   "base_rate": 0.27794561933534745,
+   "n_bcy": 993.0,
+   "test_precision": 0.7873303167420814,
+   "test_recall": 0.6304347826086957,
+   "test_flagged": 221.0
+  },
+  "Random forest": {
+   "MAE_bcy": 1.7000105465328885,
+   "MAE_row": 2.1672878992350646,
+   "RMSE_row": 3.278725402144452,
+   "AP": 0.8912878319104649,
+   "base_rate": 0.27794561933534745,
+   "n_bcy": 993.0,
+   "test_precision": 0.828125,
+   "test_recall": 0.7681159420289855,
+   "test_flagged": 256.0
+  },
+  "LightGBM (default)": {
+   "MAE_bcy": 1.7133119398306198,
+   "MAE_row": 2.1362434643938957,
+   "RMSE_row": 3.2641859555433097,
+   "AP": 0.9027673781822497,
+   "base_rate": 0.27794561933534745,
+   "n_bcy": 993.0,
+   "test_precision": 0.8301886792452831,
+   "test_recall": 0.7971014492753623,
+   "test_flagged": 265.0
+  },
+  "LightGBM (tuned)": {
+   "MAE_bcy": 1.6228519943344837,
+   "MAE_row": 2.0695552246485525,
+   "RMSE_row": 3.157291005424356,
+   "AP": 0.9058879770921324,
+   "base_rate": 0.27794561933534745,
+   "n_bcy": 993.0,
+   "test_precision": 0.8326996197718631,
+   "test_recall": 0.7934782608695652,
+   "test_flagged": 263.0
+  }
+ },
+ "test_n_bcy": 993,
+ "criteria": {
+  "improv_val": 28.8451696190991,
+  "improv_test": 60.33146595088616,
+  "val_test_gap_pct": 8.207651901043779,
+  "val_mae": 1.4997571482454741,
+  "test_mae": 1.6228519943344837,
+  "gap_row_pct": 4.450955812518131,
+  "recall_base": 0.0,
+  "recall_model": 0.7934782608695652,
+  "thr": 0.1545136962375917
+ },
+ "by_year": [
+  {
+   "year": 2020,
+   "MAE_bcy_model": 1.37,
+   "MAE_bcy_baseline": 1.751,
+   "improvement_pct": 21.777
+  },
+  {
+   "year": 2021,
+   "MAE_bcy_model": 1.63,
+   "MAE_bcy_baseline": 2.464,
+   "improvement_pct": 33.868
+  },
+  {
+   "year": 2022,
+   "MAE_bcy_model": 1.486,
+   "MAE_bcy_baseline": 2.869,
+   "improvement_pct": 48.203
+  },
+  {
+   "year": 2023,
+   "MAE_bcy_model": 1.603,
+   "MAE_bcy_baseline": 4.888,
+   "improvement_pct": 67.205
+  },
+  {
+   "year": 2024,
+   "MAE_bcy_model": 1.779,
+   "MAE_bcy_baseline": 4.516,
+   "improvement_pct": 60.596
+  }
+ ],
+ "mae_row_true_labels": 2.0296335431616965,
+ "shap_top": [
+  {
+   "feature": "irrigated_flag",
+   "mean_|SHAP|_%": 7.27,
+   "group": "plot"
+  },
+  {
+   "feature": "rain_cum",
+   "mean_|SHAP|_%": 6.46,
+   "group": "weather"
+  },
+  {
+   "feature": "rain_ratio_req",
+   "mean_|SHAP|_%": 6.04,
+   "group": "ratio"
+  },
+  {
+   "feature": "junsep",
+   "mean_|SHAP|_%": 5.55,
+   "group": "weather"
+  },
+  {
+   "feature": "bc_roll3",
+   "mean_|SHAP|_%": 4.27,
+   "group": "rolling"
+  },
+  {
+   "feature": "vc_roll3",
+   "mean_|SHAP|_%": 3.92,
+   "group": "rolling"
+  },
+  {
+   "feature": "variety_te",
+   "mean_|SHAP|_%": 3.2,
+   "group": "encoded"
+  },
+  {
+   "feature": "rain_anom_pct",
+   "mean_|SHAP|_%": 2.96,
+   "group": "ratio"
+  },
+  {
+   "feature": "crop_id",
+   "mean_|SHAP|_%": 2.53,
+   "group": "category"
+  },
+  {
+   "feature": "price_to_cost",
+   "mean_|SHAP|_%": 2.15,
+   "group": "ratio"
+  },
+  {
+   "feature": "rain_octjan",
+   "mean_|SHAP|_%": 1.7,
+   "group": "weather"
+  },
+  {
+   "feature": "junsep_lag1",
+   "mean_|SHAP|_%": 1.69,
+   "group": "lag"
+  }
+ ],
+ "shap_groups": {
+  "weather": 26.254066884538755,
+  "ratio": 24.02972604625934,
+  "rolling": 14.641566281656852,
+  "plot": 11.363664471392775,
+  "lag": 8.446539263804704,
+  "encoded": 7.831831869405565,
+  "category": 4.883833711753764,
+  "soil": 2.5487714711882425
+ },
+ "shap_direction": {
+  "irrigated_flag": 0.67,
+  "rain_cum": 0.62,
+  "rain_ratio_req": 0.53,
+  "junsep": 0.54,
+  "bc_roll3": -0.78,
+  "vc_roll3": -0.96,
+  "variety_te": 0.99,
+  "rain_anom_pct": 0.8
+ },
+ "wrong": {
+  "village": "YVT-B03-V11",
+  "crop": "wheat",
+  "year": 2024,
+  "district": "Yavatmal",
+  "pred": 20.07223169773106,
+  "actual": 37.42916666666667,
+  "base": 10.252500000000001,
+  "ref": 23.97972222222222,
+  "n": 6,
+  "peer_median_err_pct": -12.49098338806972,
+  "peer_share_over15": 0.0,
+  "other_dist_err_pct": -5.655567079668311,
+  "shap_top": {
+   "irrigated_flag": 0.12659641048291623,
+   "rain_ratio_req": -0.10643725979109286,
+   "junsep": -0.07939002364133638,
+   "vc_roll3": -0.07296738135599798,
+   "rain_cum": -0.0664675689948318,
+   "bc_roll3": -0.05903363519488538
+  },
+  "inputs": {
+   "junsep": 487.63,
+   "rain_cum": 547.03,
+   "rain_ratio_req": 0.62,
+   "rain_anom_pct": -0.4,
+   "rain_missing_monsoon": 1.0,
+   "irrigated_flag": 0.5,
+   "sow_delay": -0.4,
+   "vc_lag1": 10.25,
+   "vc_roll3": 23.98
+  },
+  "hist": {
+   "2018": 21.2,
+   "2019": 28.4,
+   "2020": 32.2,
+   "2021": 33.9,
+   "2022": 27.8,
+   "2023": 10.3,
+   "2024": 37.4
+  }
+ },
+ "big_bias_cells": [
+  {
+   "district": "Yavatmal",
+   "crop": "gram",
+   "year": 2024,
+   "rel_bias_pct": -21.6,
+   "n": 277.0
+  },
+  {
+   "district": "Yavatmal",
+   "crop": "cotton",
+   "year": 2024,
+   "rel_bias_pct": -19.2,
+   "n": 687.0
+  },
+  {
+   "district": "Amravati",
+   "crop": "gram",
+   "year": 2024,
+   "rel_bias_pct": -18.9,
+   "n": 427.0
+  },
+  {
+   "district": "Wardha",
+   "crop": "soybean",
+   "year": 2023,
+   "rel_bias_pct": -18.9,
+   "n": 574.0
+  },
+  {
+   "district": "Amravati",
+   "crop": "cotton",
+   "year": 2022,
+   "rel_bias_pct": -18.5,
+   "n": 625.0
+  },
+  {
+   "district": "Wardha",
+   "crop": "cotton",
+   "year": 2022,
+   "rel_bias_pct": -17.6,
+   "n": 668.0
+  },
+  {
+   "district": "Bhandara",
+   "crop": "cotton",
+   "year": 2024,
+   "rel_bias_pct": -14.9,
+   "n": 15.0
+  },
+  {
+   "district": "Wardha",
+   "crop": "cotton",
+   "year": 2023,
+   "rel_bias_pct": -14.2,
+   "n": 672.0
+  },
+  {
+   "district": "Chandrapur",
+   "crop": "gram",
+   "year": 2024,
+   "rel_bias_pct": -14.1,
+   "n": 156.0
+  },
+  {
+   "district": "Yavatmal",
+   "crop": "tur",
+   "year": 2024,
+   "rel_bias_pct": -13.2,
+   "n": 665.0
+  },
+  {
+   "district": "Yavatmal",
+   "crop": "wheat",
+   "year": 2024,
+   "rel_bias_pct": -13.1,
+   "n": 221.0
+  },
+  {
+   "district": "Amravati",
+   "crop": "wheat",
+   "year": 2024,
+   "rel_bias_pct": -13.0,
+   "n": 374.0
+  },
+  {
+   "district": "Nagpur",
+   "crop": "rice",
+   "year": 2023,
+   "rel_bias_pct": -12.8,
+   "n": 183.0
+  },
+  {
+   "district": "Nagpur",
+   "crop": "cotton",
+   "year": 2022,
+   "rel_bias_pct": -12.5,
+   "n": 653.0
+  },
+  {
+   "district": "Chandrapur",
+   "crop": "tur",
+   "year": 2024,
+   "rel_bias_pct": -12.3,
+   "n": 224.0
+  },
+  {
+   "district": "Bhandara",
+   "crop": "cotton",
+   "year": 2022,
+   "rel_bias_pct": -12.2,
+   "n": 14.0
+  },
+  {
+   "district": "Wardha",
+   "crop": "gram",
+   "year": 2023,
+   "rel_bias_pct": 13.6,
+   "n": 376.0
+  },
+  {
+   "district": "Chandrapur",
+   "crop": "tur",
+   "year": 2022,
+   "rel_bias_pct": 14.1,
+   "n": 206.0
+  },
+  {
+   "district": "Wardha",
+   "crop": "rice",
+   "year": 2024,
+   "rel_bias_pct": 20.8,
+   "n": 58.0
+  },
+  {
+   "district": "Yavatmal",
+   "crop": "wheat",
+   "year": 2023,
+   "rel_bias_pct": 20.8,
+   "n": 210.0
+  },
+  {
+   "district": "Amravati",
+   "crop": "wheat",
+   "year": 2023,
+   "rel_bias_pct": 25.5,
+   "n": 358.0
+  },
+  {
+   "district": "Amravati",
+   "crop": "gram",
+   "year": 2023,
+   "rel_bias_pct": 29.1,
+   "n": 429.0
+  },
+  {
+   "district": "Yavatmal",
+   "crop": "gram",
+   "year": 2023,
+   "rel_bias_pct": 36.5,
+   "n": 257.0
+  },
+  {
+   "district": "Wardha",
+   "crop": "wheat",
+   "year": 2023,
+   "rel_bias_pct": 37.2,
+   "n": 372.0
+  }
+ ],
+ "fair_before": [
+  {
+   "group": "district: Amravati",
+   "n": 7645.0,
+   "mean_yield": 11.7,
+   "MAE": 2.04,
+   "rel_MAE_pct": 17.48,
+   "bias_pct": -4.89
+  },
+  {
+   "group": "district: Bhandara",
+   "n": 6689.0,
+   "mean_yield": 18.67,
+   "MAE": 2.55,
+   "rel_MAE_pct": 13.66,
+   "bias_pct": 1.25
+  },
+  {
+   "group": "district: Chandrapur",
+   "n": 6758.0,
+   "mean_yield": 13.31,
+   "MAE": 1.84,
+   "rel_MAE_pct": 13.84,
+   "bias_pct": -1.39
+  },
+  {
+   "group": "district: Nagpur",
+   "n": 7825.0,
+   "mean_yield": 14.42,
+   "MAE": 2.11,
+   "rel_MAE_pct": 14.64,
+   "bias_pct": -4.51
+  },
+  {
+   "group": "district: Wardha",
+   "n": 7662.0,
+   "mean_yield": 12.65,
+   "MAE": 2.16,
+   "rel_MAE_pct": 17.06,
+   "bias_pct": -2.1
+  },
+  {
+   "group": "district: Yavatmal",
+   "n": 7315.0,
+   "mean_yield": 9.88,
+   "MAE": 1.73,
+   "rel_MAE_pct": 17.52,
+   "bias_pct": -4.03
+  },
+  {
+   "group": "crop: cotton",
+   "n": 9913.0,
+   "mean_yield": 9.05,
+   "MAE": 1.44,
+   "rel_MAE_pct": 15.9,
+   "bias_pct": -9.05
+  },
+  {
+   "group": "crop: gram",
+   "n": 5546.0,
+   "mean_yield": 10.16,
+   "MAE": 1.7,
+   "rel_MAE_pct": 16.77,
+   "bias_pct": -0.87
+  },
+  {
+   "group": "crop: rice",
+   "n": 5022.0,
+   "mean_yield": 21.8,
+   "MAE": 3.11,
+   "rel_MAE_pct": 14.26,
+   "bias_pct": 0.28
+  },
+  {
+   "group": "crop: soybean",
+   "n": 8710.0,
+   "mean_yield": 9.04,
+   "MAE": 1.43,
+   "rel_MAE_pct": 15.8,
+   "bias_pct": -4.18
+  },
+  {
+   "group": "crop: tur",
+   "n": 8145.0,
+   "mean_yield": 6.9,
+   "MAE": 1.0,
+   "rel_MAE_pct": 14.45,
+   "bias_pct": -1.73
+  },
+  {
+   "group": "crop: wheat",
+   "n": 6558.0,
+   "mean_yield": 29.87,
+   "MAE": 4.72,
+   "rel_MAE_pct": 15.81,
+   "bias_pct": -0.78
+  },
+  {
+   "group": "irrig: N",
+   "n": 34248.0,
+   "mean_yield": 10.55,
+   "MAE": 1.68,
+   "rel_MAE_pct": 15.97,
+   "bias_pct": -3.49
+  },
+  {
+   "group": "irrig: Y",
+   "n": 8331.0,
+   "mean_yield": 24.94,
+   "MAE": 3.6,
+   "rel_MAE_pct": 14.45,
+   "bias_pct": -0.39
+  },
+  {
+   "group": "irrig: unknown",
+   "n": 1315.0,
+   "mean_yield": 13.12,
+   "MAE": 2.37,
+   "rel_MAE_pct": 18.05,
+   "bias_pct": -3.95
+  },
+  {
+   "group": "farm_size: 1-2 ha (small)",
+   "n": 15236.0,
+   "mean_yield": 13.37,
+   "MAE": 2.06,
+   "rel_MAE_pct": 15.42,
+   "bias_pct": -2.4
+  },
+  {
+   "group": "farm_size: <1 ha (marginal)",
+   "n": 17982.0,
+   "mean_yield": 13.24,
+   "MAE": 2.06,
+   "rel_MAE_pct": 15.55,
+   "bias_pct": -2.24
+  },
+  {
+   "group": "farm_size: >2 ha (medium/large)",
+   "n": 10676.0,
+   "mean_yield": 13.53,
+   "MAE": 2.1,
+   "rel_MAE_pct": 15.5,
+   "bias_pct": -2.68
+  },
+  {
+   "group": "data_complete: all inputs observed",
+   "n": 14705.0,
+   "mean_yield": 13.05,
+   "MAE": 1.93,
+   "rel_MAE_pct": 14.79,
+   "bias_pct": -1.21
+  },
+  {
+   "group": "data_complete: \u22651 input imputed/missing",
+   "n": 29189.0,
+   "mean_yield": 13.51,
+   "MAE": 2.14,
+   "rel_MAE_pct": 15.84,
+   "bias_pct": -2.99
+  }
+ ],
+ "recal": {
+  "adopt": true,
+  "within_val": {
+   "mean_abs_cell_bias_before": 8.327354440434503,
+   "after": 7.855147750927389,
+   "MAE_before": 1.6296309909785411,
+   "MAE_after": 1.5899837047558545
+  },
+  "test": [
+   {
+    "index": "uncalibrated",
+    "MAE_bcy": 1.623,
+    "MAE_row": 2.07,
+    "mean_|cell bias| %": 4.206
+   },
+   {
+    "index": "recalibrated",
+    "MAE_bcy": 1.616,
+    "MAE_row": 2.063,
+    "mean_|cell bias| %": 3.722
+   }
+  ]
+ },
+ "fair_after": [
+  {
+   "group": "district: Amravati",
+   "n": 7645.0,
+   "mean_yield": 11.7,
+   "MAE": 1.99,
+   "rel_MAE_pct": 17.05,
+   "bias_pct": -3.05
+  },
+  {
+   "group": "district: Bhandara",
+   "n": 6689.0,
+   "mean_yield": 18.67,
+   "MAE": 2.67,
+   "rel_MAE_pct": 14.29,
+   "bias_pct": 3.31
+  },
+  {
+   "group": "district: Chandrapur",
+   "n": 6758.0,
+   "mean_yield": 13.31,
+   "MAE": 1.84,
+   "rel_MAE_pct": 13.82,
+   "bias_pct": -0.75
+  },
+  {
+   "group": "district: Nagpur",
+   "n": 7825.0,
+   "mean_yield": 14.42,
+   "MAE": 2.08,
+   "rel_MAE_pct": 14.41,
+   "bias_pct": -0.97
+  },
+  {
+   "group": "district: Wardha",
+   "n": 7662.0,
+   "mean_yield": 12.65,
+   "MAE": 2.1,
+   "rel_MAE_pct": 16.62,
+   "bias_pct": 0.06
+  },
+  {
+   "group": "district: Yavatmal",
+   "n": 7315.0,
+   "mean_yield": 9.88,
+   "MAE": 1.73,
+   "rel_MAE_pct": 17.5,
+   "bias_pct": -1.52
+  },
+  {
+   "group": "crop: cotton",
+   "n": 9913.0,
+   "mean_yield": 9.05,
+   "MAE": 1.33,
+   "rel_MAE_pct": 14.72,
+   "bias_pct": -3.29
+  },
+  {
+   "group": "crop: gram",
+   "n": 5546.0,
+   "mean_yield": 10.16,
+   "MAE": 1.72,
+   "rel_MAE_pct": 16.95,
+   "bias_pct": -0.83
+  },
+  {
+   "group": "crop: rice",
+   "n": 5022.0,
+   "mean_yield": 21.8,
+   "MAE": 3.1,
+   "rel_MAE_pct": 14.2,
+   "bias_pct": -0.41
+  },
+  {
+   "group": "crop: soybean",
+   "n": 8710.0,
+   "mean_yield": 9.04,
+   "MAE": 1.43,
+   "rel_MAE_pct": 15.81,
+   "bias_pct": -1.32
+  },
+  {
+   "group": "crop: tur",
+   "n": 8145.0,
+   "mean_yield": 6.9,
+   "MAE": 1.01,
+   "rel_MAE_pct": 14.65,
+   "bias_pct": -0.6
+  },
+  {
+   "group": "crop: wheat",
+   "n": 6558.0,
+   "mean_yield": 29.87,
+   "MAE": 4.81,
+   "rel_MAE_pct": 16.12,
+   "bias_pct": 1.96
+  },
+  {
+   "group": "irrig: N",
+   "n": 34248.0,
+   "mean_yield": 10.55,
+   "MAE": 1.67,
+   "rel_MAE_pct": 15.82,
+   "bias_pct": -1.2
+  },
+  {
+   "group": "irrig: Y",
+   "n": 8331.0,
+   "mean_yield": 24.94,
+   "MAE": 3.64,
+   "rel_MAE_pct": 14.59,
+   "bias_pct": 1.57
+  },
+  {
+   "group": "irrig: unknown",
+   "n": 1315.0,
+   "mean_yield": 13.12,
+   "MAE": 2.34,
+   "rel_MAE_pct": 17.86,
+   "bias_pct": -1.87
+  },
+  {
+   "group": "farm_size: 1-2 ha (small)",
+   "n": 15236.0,
+   "mean_yield": 13.37,
+   "MAE": 2.05,
+   "rel_MAE_pct": 15.35,
+   "bias_pct": -0.23
+  },
+  {
+   "group": "farm_size: <1 ha (marginal)",
+   "n": 17982.0,
+   "mean_yield": 13.24,
+   "MAE": 2.06,
+   "rel_MAE_pct": 15.54,
+   "bias_pct": -0.07
+  },
+  {
+   "group": "farm_size: >2 ha (medium/large)",
+   "n": 10676.0,
+   "mean_yield": 13.53,
+   "MAE": 2.09,
+   "rel_MAE_pct": 15.43,
+   "bias_pct": -0.53
+  },
+  {
+   "group": "data_complete: all inputs observed",
+   "n": 14705.0,
+   "mean_yield": 13.05,
+   "MAE": 1.92,
+   "rel_MAE_pct": 14.73,
+   "bias_pct": 0.88
+  },
+  {
+   "group": "data_complete: \u22651 input imputed/missing",
+   "n": 29189.0,
+   "mean_yield": 13.51,
+   "MAE": 2.13,
+   "rel_MAE_pct": 15.79,
+   "bias_pct": -0.78
+  }
+ ],
+ "stability_noise": [
+  {
+   "rain_noise_sd": "5%",
+   "mean_abs_change_in_forecast_pct": 2.522,
+   "MAE_bcy": 1.618,
+   "MAE_bcy_unperturbed": 1.623
+  },
+  {
+   "rain_noise_sd": "15%",
+   "mean_abs_change_in_forecast_pct": 7.015,
+   "MAE_bcy": 1.68,
+   "MAE_bcy_unperturbed": 1.623
+  }
+ ],
+ "stability_gauge": {
+  "before": 1.6228519943344837,
+  "after": 1.7441919601444298
+ },
+ "dc_tonnage": {
+  "model_tonnage_err_%": 7.7,
+  "baseline_tonnage_err_%": 23.8
+ },
+ "dc_risk": [
+  {
+   "index": "model",
+   "flagged": 45.0,
+   "actual_at_risk": 43.0,
+   "hits": 38.0,
+   "precision": 0.84,
+   "recall": 0.88
+  },
+  {
+   "index": "persistence baseline",
+   "flagged": 48.0,
+   "actual_at_risk": 43.0,
+   "hits": 10.0,
+   "precision": 0.21,
+   "recall": 0.23
+  }
+ ],
+ "tiers": {
+  "A  Lock in early": 14,
+  "C  Opportunistic buying": 13,
+  "D  Monitor / deprioritise": 5,
+  "B  Contract + backup supply": 4
+ },
+ "tier_hindsight": {
+  "flag correct": 32,
+  "false alarm": 3,
+  "missed shortfall": 1
+ },
+ "proc_median_kt": 26.329270780247207,
+ "proc_table": [
+  {
+   "district": "Bhandara",
+   "crop": "rice",
+   "exp_kt": 105.6,
+   "chg_pred": 8.9,
+   "chg_act": -1.1,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Nagpur",
+   "crop": "wheat",
+   "exp_kt": 92.1,
+   "chg_pred": 5.7,
+   "chg_act": 12.3,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Nagpur",
+   "crop": "cotton",
+   "exp_kt": 88.8,
+   "chg_pred": 13.6,
+   "chg_act": 9.5,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Chandrapur",
+   "crop": "rice",
+   "exp_kt": 83.0,
+   "chg_pred": 12.9,
+   "chg_act": 2.0,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Amravati",
+   "crop": "soybean",
+   "exp_kt": 74.9,
+   "chg_pred": 8.5,
+   "chg_act": 18.4,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Amravati",
+   "crop": "cotton",
+   "exp_kt": 73.6,
+   "chg_pred": 6.7,
+   "chg_act": 14.5,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Wardha",
+   "crop": "soybean",
+   "exp_kt": 68.7,
+   "chg_pred": -4.5,
+   "chg_act": 1.0,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Wardha",
+   "crop": "wheat",
+   "exp_kt": 59.0,
+   "chg_pred": 3.1,
+   "chg_act": 5.6,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Nagpur",
+   "crop": "soybean",
+   "exp_kt": 56.9,
+   "chg_pred": 20.7,
+   "chg_act": 21.8,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Amravati",
+   "crop": "wheat",
+   "exp_kt": 54.7,
+   "chg_pred": 2.4,
+   "chg_act": 16.6,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Bhandara",
+   "crop": "wheat",
+   "exp_kt": 54.6,
+   "chg_pred": 8.8,
+   "chg_act": 6.2,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Chandrapur",
+   "crop": "cotton",
+   "exp_kt": 48.6,
+   "chg_pred": 17.0,
+   "chg_act": 21.2,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Chandrapur",
+   "crop": "soybean",
+   "exp_kt": 37.3,
+   "chg_pred": 18.7,
+   "chg_act": 26.5,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Chandrapur",
+   "crop": "wheat",
+   "exp_kt": 27.9,
+   "chg_pred": 5.2,
+   "chg_act": 9.3,
+   "tier": "A  Lock in early",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Wardha",
+   "crop": "cotton",
+   "exp_kt": 86.1,
+   "chg_pred": -7.8,
+   "chg_act": -7.6,
+   "tier": "B  Contract + backup supply",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Yavatmal",
+   "crop": "cotton",
+   "exp_kt": 66.8,
+   "chg_pred": -20.2,
+   "chg_act": -6.4,
+   "tier": "B  Contract + backup supply",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Yavatmal",
+   "crop": "soybean",
+   "exp_kt": 41.6,
+   "chg_pred": -20.2,
+   "chg_act": -13.8,
+   "tier": "B  Contract + backup supply",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Yavatmal",
+   "crop": "wheat",
+   "exp_kt": 35.9,
+   "chg_pred": -9.5,
+   "chg_act": 2.1,
+   "tier": "B  Contract + backup supply",
+   "verdict_in_hindsight": "false alarm"
+  },
+  {
+   "district": "Nagpur",
+   "crop": "rice",
+   "exp_kt": 24.4,
+   "chg_pred": 5.1,
+   "chg_act": -1.2,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Nagpur",
+   "crop": "tur",
+   "exp_kt": 24.3,
+   "chg_pred": 16.1,
+   "chg_act": 4.0,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Nagpur",
+   "crop": "gram",
+   "exp_kt": 23.3,
+   "chg_pred": 8.6,
+   "chg_act": 12.4,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Amravati",
+   "crop": "tur",
+   "exp_kt": 22.6,
+   "chg_pred": 12.0,
+   "chg_act": 16.1,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Amravati",
+   "crop": "gram",
+   "exp_kt": 19.7,
+   "chg_pred": 8.4,
+   "chg_act": 32.8,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Wardha",
+   "crop": "gram",
+   "exp_kt": 18.7,
+   "chg_pred": -0.8,
+   "chg_act": 14.1,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Bhandara",
+   "crop": "tur",
+   "exp_kt": 13.9,
+   "chg_pred": 13.3,
+   "chg_act": 10.8,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Bhandara",
+   "crop": "gram",
+   "exp_kt": 13.1,
+   "chg_pred": 11.3,
+   "chg_act": 13.1,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Chandrapur",
+   "crop": "tur",
+   "exp_kt": 12.7,
+   "chg_pred": 14.0,
+   "chg_act": 28.8,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Bhandara",
+   "crop": "soybean",
+   "exp_kt": 10.1,
+   "chg_pred": 8.3,
+   "chg_act": 7.2,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Chandrapur",
+   "crop": "gram",
+   "exp_kt": 7.9,
+   "chg_pred": 3.4,
+   "chg_act": 23.3,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Bhandara",
+   "crop": "cotton",
+   "exp_kt": 2.0,
+   "chg_pred": 1.5,
+   "chg_act": 19.3,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Amravati",
+   "crop": "rice",
+   "exp_kt": 1.8,
+   "chg_pred": 1.5,
+   "chg_act": -8.6,
+   "tier": "C  Opportunistic buying",
+   "verdict_in_hindsight": "missed shortfall"
+  },
+  {
+   "district": "Wardha",
+   "crop": "tur",
+   "exp_kt": 24.7,
+   "chg_pred": -6.3,
+   "chg_act": -15.3,
+   "tier": "D  Monitor / deprioritise",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Yavatmal",
+   "crop": "tur",
+   "exp_kt": 24.7,
+   "chg_pred": -13.5,
+   "chg_act": 1.1,
+   "tier": "D  Monitor / deprioritise",
+   "verdict_in_hindsight": "false alarm"
+  },
+  {
+   "district": "Yavatmal",
+   "crop": "gram",
+   "exp_kt": 12.5,
+   "chg_pred": -7.7,
+   "chg_act": 16.3,
+   "tier": "D  Monitor / deprioritise",
+   "verdict_in_hindsight": "false alarm"
+  },
+  {
+   "district": "Wardha",
+   "crop": "rice",
+   "exp_kt": 4.9,
+   "chg_pred": -5.2,
+   "chg_act": -21.6,
+   "tier": "D  Monitor / deprioritise",
+   "verdict_in_hindsight": "flag correct"
+  },
+  {
+   "district": "Yavatmal",
+   "crop": "rice",
+   "exp_kt": 2.0,
+   "chg_pred": -28.0,
+   "chg_act": -18.6,
+   "tier": "D  Monitor / deprioritise",
+   "verdict_in_hindsight": "flag correct"
+  }
+ ],
+ "feature_groups": {
+  "lag": [
+   "vc_lag1",
+   "vc_lag2",
+   "bc_lag1",
+   "dc_lag1",
+   "junsep_lag1",
+   "price_prev_harvest"
+  ],
+  "rolling": [
+   "vc_roll3",
+   "vc_roll3sd",
+   "bc_roll3",
+   "dc_roll3"
+  ],
+  "ratio": [
+   "vc_yoy",
+   "dc_lag1_rel",
+   "vc_lag1_vs_roll3",
+   "rain_ratio_req",
+   "rain_anom_pct",
+   "ja_share",
+   "rain_intensity",
+   "n_p_ratio",
+   "n_k_ratio",
+   "ph_dev",
+   "price_pre_mom",
+   "price_hv_prev_ratio",
+   "price_to_cost",
+   "fert_n_rel",
+   "sow_delay"
+  ],
+  "weather": [
+   "rain_cum",
+   "junsep",
+   "rain_ja",
+   "r_jun",
+   "r_sep",
+   "rain_octjan",
+   "rd_ja",
+   "rain_missing_monsoon"
+  ],
+  "soil": [
+   "ph",
+   "oc_pct",
+   "n_kgha",
+   "p_kgha",
+   "k_kgha",
+   "ec",
+   "soil_age",
+   "soil_missing"
+  ],
+  "encoded": [
+   "village_te",
+   "village_hist",
+   "variety_te",
+   "variety_age"
+  ],
+  "plot": [
+   "area_log",
+   "irrigated_flag",
+   "fert_n_kgha",
+   "fert_missing",
+   "sowing_week"
+  ],
+  "category": [
+   "crop_id",
+   "district_id",
+   "is_rabi"
+  ]
+ },
+ "final_params": {
+  "n_estimators": 500.0,
+  "learning_rate": 0.03,
+  "num_leaves": 127.0,
+  "min_child_samples": 200.0,
+  "subsample": 0.8,
+  "subsample_freq": 1.0,
+  "colsample_bytree": 0.6,
+  "objective": "regression_l1",
+  "reg_lambda": 1.0
+ }
+}

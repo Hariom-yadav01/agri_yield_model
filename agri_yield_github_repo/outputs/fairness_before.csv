@@ -1,0 +1,21 @@
+,n,mean_yield,MAE,rel_MAE_pct,bias_pct
+district: Amravati,7645.0,11.7,2.04,17.48,-4.89
+district: Bhandara,6689.0,18.67,2.55,13.66,1.25
+district: Chandrapur,6758.0,13.31,1.84,13.84,-1.39
+district: Nagpur,7825.0,14.42,2.11,14.64,-4.51
+district: Wardha,7662.0,12.65,2.16,17.06,-2.1
+district: Yavatmal,7315.0,9.88,1.73,17.52,-4.03
+crop: cotton,9913.0,9.05,1.44,15.9,-9.05
+crop: gram,5546.0,10.16,1.7,16.77,-0.87
+crop: rice,5022.0,21.8,3.11,14.26,0.28
+crop: soybean,8710.0,9.04,1.43,15.8,-4.18
+crop: tur,8145.0,6.9,1.0,14.45,-1.73
+crop: wheat,6558.0,29.87,4.72,15.81,-0.78
+irrig: N,34248.0,10.55,1.68,15.97,-3.49
+irrig: Y,8331.0,24.94,3.6,14.45,-0.39
+irrig: unknown,1315.0,13.12,2.37,18.05,-3.95
+farm_size: 1-2 ha (small),15236.0,13.37,2.06,15.42,-2.4
+farm_size: <1 ha (marginal),17982.0,13.24,2.06,15.55,-2.24
+farm_size: >2 ha (medium/large),10676.0,13.53,2.1,15.5,-2.68
+data_complete: all inputs observed,14705.0,13.05,1.93,14.79,-1.21
+data_complete: ≥1 input imputed/missing,29189.0,13.51,2.14,15.84,-2.99
